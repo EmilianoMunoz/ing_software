@@ -1,5 +1,6 @@
 # Activar el entorno virtual
-source /home/emiliano/Escritorio/ing_software/ing_software/ing-soft-env/bin/activate
+source /home/emiliano/Escritorio/ing_software/ing_software_project/ing_soft_env/bin/activate
+
 
 # Verificar si el entorno virtual se activó correctamente
 if [ -n "$VIRTUAL_ENV" ]; then
