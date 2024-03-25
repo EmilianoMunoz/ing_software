@@ -39,3 +39,5 @@ out/
 # Carpeta de entorno virtual
 ing_soft_env/
 
+docker/mysql/.env
+
