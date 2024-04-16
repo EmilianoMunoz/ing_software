@@ -1,8 +1,0 @@
-flask == 2.3.3
-python-dotenv == 1.0.0
-flask-SQLAlchemy == 3.0.5
-Flask-Migrate == 4.0.4
-psycopg[binary]
-psycopg2 == 2.9.7
-mysqlclient == 2.2.4
-
