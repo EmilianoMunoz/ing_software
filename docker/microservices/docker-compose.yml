@@ -1,0 +1,59 @@
+services:
+  user:
+    build:
+      context: ../../ms-user  
+      dockerfile: Dockerfile
+    networks:
+      - mired
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DBNAME=${REDIS_DBNAME}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.user.rule=Host(`user.eden.localhost`)"
+      - "traefik.http.routers.user.tls=true"
+      - "traefik.http.services.user.loadbalancer.server.port=5000"
+      - "traefik.http.middlewares.user.circuitbreaker.expression=LatencyAtQuantileMS(50.0) > 100"
+      - "traefik.http.middlewares.user.circuitbreaker.expression=ResponseCodeRatio(500, 600, 0, 600) > 0.25"
+      - "traefik.http.middlewares.user.circuitbreaker.expression=NetworkErrorRatio() > 0.5"
+
+  # cabin:
+  #   build:
+  #     context: ../../ms-cabin
+  #     dockerfile: Dockerfile
+  #   networks:
+  #     - mired
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - "traefik.http.routers.cabin.rule=Host(`cabin.eden.localhost`)"
+  #     - "traefik.http.routers.cabin.tls=true"
+  #     - "traefik.http.services.cabin.loadbalancer.server.port=5000"
+  #     - "traefik.http.middlewares.cabin.circuitbreaker.expression=LatencyAtQuantileMS(50.0) > 100"
+  #     - "traefik.http.middlewares.cabin.circuitbreaker.expression=ResponseCodeRatio(500, 600, 0, 600) > 0.25"
+  #     - "traefik.http.middlewares.cabin.circuitbreaker.expression=NetworkErrorRatio() > 0.5"
+
+  # reserve:
+  #   build:
+  #     context: ../../ms-reserve 
+  #     dockerfile: Dockerfile
+  #   networks:
+  #     - mired
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - "traefik.http.routers.reserve.rule=Host(`reserve.eden.localhost`)"
+  #     - "traefik.http.routers.reserve.tls=true"
+  #     - "traefik.http.services.reserve.loadbalancer.server.port=5000"
+  #     - "traefik.http.middlewares.reserve.circuitbreaker.expression=LatencyAtQuantileMS(50.0) > 100"
+  #     - "traefik.http.middlewares.reserve.circuitbreaker.expression=ResponseCodeRatio(500, 600, 0, 600) > 0.25"
+  #     - "traefik.http.middlewares.reserve.circuitbreaker.expression=NetworkErrorRatio() > 0.5"
+
+networks:
+  mired:
+      external: true

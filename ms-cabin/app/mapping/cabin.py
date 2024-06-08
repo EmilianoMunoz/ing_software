@@ -1,5 +1,5 @@
 from marshmallow import validate, fields, Schema, post_load
-from app.models import CabinModels as Cabin
+from app.models import Cabin
 
 class CabinSchema(Schema):
     id = fields.Int(dump_only=True)

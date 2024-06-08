@@ -10,8 +10,3 @@ class User(db.Model):
     surname = db.Column('surname', db.String(255))
     email = db.Column('email', db.String(255))
     password = db.Column('password', db.String(255))
-    
-
-    
-
-    

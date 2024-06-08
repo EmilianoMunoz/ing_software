@@ -1,0 +1,18 @@
+http:
+  routers:
+    traefik:
+      rule: "Host(`traefik.eden.localhost`)"
+      service: "api@internal"
+      tls:
+        domains:
+          - main: "eden.localhost"
+            sans:
+              - "*.eden.localhost"
+          - main: "eden.local"
+            sans:
+              - "*.eden.local"
+
+tls:
+  certificates:
+    - certFile: "/etc/certs/eden-cert.pem"
+      keyFile: "/etc/certs/eden-key.pem"

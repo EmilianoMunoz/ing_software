@@ -1,4 +1,4 @@
-from app.models import CabinModels as Cabin
+from app.models import Cabin
 from app.repositories import CabinRepository
 
 class CabinService:

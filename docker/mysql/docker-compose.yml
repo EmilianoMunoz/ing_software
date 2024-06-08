@@ -1,0 +1,23 @@
+services:
+  mysql:
+      image: mysql:8.0.36-debian
+      container_name: mysql
+      command: --default-authentication-plugin=mysql_native_password
+      environment:
+        - MYSQL_USER=${MYSQL_USER}
+        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        - MYSQL_DATABASE=${MYSQL_DATABASE}
+        - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      volumes:
+        - ./data:/var/lib/mysql
+      restart: always
+      networks: 
+        - mired
+      labels:
+        - "traefik.enable=true"
+        - "traefik.tcp.routers.mysql.rule=HostSNI(`*`)"
+        - "traefik.tcp.services.mysql.loadbalancer.server.port=3306"
+
+networks:
+  mired:
+      external: true

@@ -18,15 +18,18 @@ class UserRepository(Create, Read, Update, Delete):
         db.session.delete(entity)
         db.session.commit()
         
-
+        
     def find_by_id(self, id: int) -> User:
         return db.session.query(self.model).filter(self.model.id == id).one()
+
 
     def find_all(self) -> list:
         return db.session.query(self.model).all()
 
+
     def find_by_email(self, email: str) -> User:
         return db.session.query(self.model).filter(self.model.email == email).one()
+
 
     def update(self, user: User, id: int) -> User:
         entity = self.find_by_id(id)

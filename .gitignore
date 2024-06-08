@@ -41,3 +41,9 @@ ing_soft_env/
 
 docker/mysql/.env
 
+ms-user/docker/mysql/data/
+ms-user/docker/mysql/data/#innodb_redo/#ib_redo17_tmp
+ms-user/docker/mysql/data/#innodb_temp/temp_1.ibt
+ms-user/docker/mysql/data/#innodb_temp/
+
+/home/emiliano/Escritorio/ing_software/ing_software_project/docker/traefik/data

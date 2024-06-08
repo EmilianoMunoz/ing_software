@@ -1,4 +1,4 @@
-from app.models import ReserveModels as Reserve
+from app.models import Reserve
 from app.repositories import ReserveRepository
 
 class ReserveService:

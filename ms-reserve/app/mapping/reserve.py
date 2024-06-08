@@ -1,5 +1,5 @@
 from marshmallow import validate, fields, Schema, post_load
-from app.models import ReserveModels as Reserve
+from app.models import Reserve
 
 class ReserveSchema(Schema):
     id = fields.Int(dump_only=True)

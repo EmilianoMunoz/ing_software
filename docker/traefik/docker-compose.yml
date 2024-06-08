@@ -1,0 +1,28 @@
+services:
+  reverse-proxy:
+    image: traefik:v2.11
+    container_name: traefik
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - "80:80"
+      - "443:443"
+      - "3306:3306"
+      - "6379:6379"
+
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./_config/traefik.yml:/etc/traefik/traefik.yml:ro
+      - ./_config/config.yml:/etc/traefik/config.yml:ro
+      - ./_certs:/etc/certs:ro
+    networks:
+      - mired
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.tls=true"
+  
+networks:
+  mired:
+      external: true
+

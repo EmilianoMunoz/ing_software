@@ -1,5 +1,5 @@
 from app import db
-from app.models import CabinModels as Cabin
+from app.models import Cabin
 from app.repositories.base import Create, Read, Update, Delete
 
 class CabinRepository(Create, Read, Update, Delete):

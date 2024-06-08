@@ -1,5 +1,5 @@
 from app import db
-from app.models import ReserveModels as Reserve
+from app.models import Reserve
 from app.repositories.base import Create, Read, Update, Delete
 
 class ReserveRepository(Create, Read, Update, Delete):
