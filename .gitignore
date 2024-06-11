@@ -47,3 +47,5 @@ ms-user/docker/mysql/data/#innodb_temp/temp_1.ibt
 ms-user/docker/mysql/data/#innodb_temp/
 
 /home/emiliano/Escritorio/ing_software/ing_software_project/docker/traefik/data
+docker/mysql/data/*
+

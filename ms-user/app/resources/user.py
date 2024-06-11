@@ -56,8 +56,8 @@ def find_all():
     response_builder.add_message("Usuarios encontrados").add_status_code(100).add_data({'users': users_json})
     return jsonify(response_schema.dump(response_builder.build()))
 
-@user.route('/update/<int:user_id>', methods=['PUT'])
-def update_user(user_id):
+@user.route('/update/<int:id>', methods=['PUT'])
+def update_user(id):
     try:
         data = request.get_json()
 
@@ -65,7 +65,7 @@ def update_user(user_id):
             return jsonify({"error": "Datos de usuario no proporcionados"}), 400
 
         service = UserService()
-        updated_user = service.update(user_id, data)
+        updated_user = service.update(id, data)
 
         if updated_user:
             response_builder = ResponseBuilder()

@@ -13,29 +13,29 @@ class UserRepository(Create, Read, Update, Delete):
         db.session.commit()
         return entity
 
-    def delete(self, id: int):
+    def delete(self, id: int) -> bool:
         entity = self.find_by_id(id)
-        db.session.delete(entity)
-        db.session.commit()
-        
-        
-    def find_by_id(self, id: int) -> User:
-        return db.session.query(self.model).filter(self.model.id == id).one()
+        if entity:
+            db.session.delete(entity)
+            db.session.commit()
+            return True
+        return False
 
+    def find_by_id(self, id: int) -> User:
+        return db.session.query(self.model).filter(self.model.id == id).one_or_none()
 
     def find_all(self) -> list:
         return db.session.query(self.model).all()
 
-
     def find_by_email(self, email: str) -> User:
-        return db.session.query(self.model).filter(self.model.email == email).one()
-
+        return db.session.query(self.model).filter(self.model.email == email).one_or_none()
 
     def update(self, user: User, id: int) -> User:
         entity = self.find_by_id(id)
-        entity.name = user.name
-        entity.surname = user.surname
-        entity.email = user.email
-        db.session.add(entity)
-        db.session.commit()
-        return entity
+        if entity:
+            entity.name = user.name
+            entity.surname = user.surname
+            entity.email = user.email
+            db.session.commit()
+            return entity
+        return None

@@ -24,20 +24,20 @@ services:
       - "traefik.http.middlewares.user.circuitbreaker.expression=ResponseCodeRatio(500, 600, 0, 600) > 0.25"
       - "traefik.http.middlewares.user.circuitbreaker.expression=NetworkErrorRatio() > 0.5"
 
-  # cabin:
-  #   build:
-  #     context: ../../ms-cabin
-  #     dockerfile: Dockerfile
-  #   networks:
-  #     - mired
-  #   labels:
-  #     - "traefik.enable=true"
-  #     - "traefik.http.routers.cabin.rule=Host(`cabin.eden.localhost`)"
-  #     - "traefik.http.routers.cabin.tls=true"
-  #     - "traefik.http.services.cabin.loadbalancer.server.port=5000"
-  #     - "traefik.http.middlewares.cabin.circuitbreaker.expression=LatencyAtQuantileMS(50.0) > 100"
-  #     - "traefik.http.middlewares.cabin.circuitbreaker.expression=ResponseCodeRatio(500, 600, 0, 600) > 0.25"
-  #     - "traefik.http.middlewares.cabin.circuitbreaker.expression=NetworkErrorRatio() > 0.5"
+  cabin:
+    build:
+      context: ../../ms-cabin
+      dockerfile: Dockerfile
+    networks:
+      - mired
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.cabin.rule=Host(`cabin.eden.localhost`)"
+      - "traefik.http.routers.cabin.tls=true"
+      - "traefik.http.services.cabin.loadbalancer.server.port=5000"
+      - "traefik.http.middlewares.cabin.circuitbreaker.expression=LatencyAtQuantileMS(50.0) > 100"
+      - "traefik.http.middlewares.cabin.circuitbreaker.expression=ResponseCodeRatio(500, 600, 0, 600) > 0.25"
+      - "traefik.http.middlewares.cabin.circuitbreaker.expression=NetworkErrorRatio() > 0.5"
 
   # reserve:
   #   build:

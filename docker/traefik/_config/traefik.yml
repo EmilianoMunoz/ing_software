@@ -22,8 +22,8 @@ log:
 entryPoints:
   redis:
     address: ":6379"
-  mysql:
-    address: ":3306"
+  postgres:
+    address: ":5432"
   http:
     address: ":80"
     http:

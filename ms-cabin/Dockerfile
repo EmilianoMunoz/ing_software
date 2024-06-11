@@ -6,9 +6,9 @@ ENV FLASK_ENV=production
 ENV PYTHONUNBUFFERED=1
 ENV PATH=$PATH:/home/flaskapp/.local/bin
 
-# Instala las dependencias del sistema necesarias para compilar mysqlclient
+# Instala las dependencias del sistema necesarias para psycopg2
 RUN apt-get update && \
-    apt-get install -y gcc mariadb-client libmariadb-dev-compat pkg-config && \
+    apt-get install -y gcc libpq-dev && \
     rm -rf /var/lib/apt/lists/*
 
 # Establece el directorio de trabajo

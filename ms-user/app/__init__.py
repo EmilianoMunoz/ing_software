@@ -20,7 +20,7 @@ def create_app():
         "user": os.getenv('DB_USER'),
         "password": os.getenv('DB_PASSWORD'),
         "host": os.getenv('DB_HOST', 'localhost'),
-        "port": os.getenv('DB_PORT', '3306'),
+        "port": os.getenv('DB_PORT', '5432'), 
         "dbname": os.getenv('DB_NAME')
     }
 
@@ -31,16 +31,18 @@ def create_app():
         'CACHE_DEFAULT_TIMEOUT': 300,
         'CACHE_REDIS_HOST': os.getenv('REDIS_HOST'),
         'CACHE_REDIS_PORT': os.getenv('REDIS_PORT'),
-        'CACHE_REDIS_DB': os.getenv('REDIS_DB'),
+        'CACHE_REDIS_DB': os.getenv('REDIS_DBNAME'),
         'CACHE_REDIS_PASSWORD': os.getenv('REDIS_PASSWORD'),
         'CACHE_KEY_PREFIX': 'user_'
     }
 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_RECORD_QUERIES'] = False
-    app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{db_parameters['user']}:{db_parameters['password']}@{db_parameters['host']}:{db_parameters['port']}/{db_parameters['dbname']}"
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DEV_DATABASE_URI')
+
     
     app.config.from_mapping(cache_config)
+    
     cache.init_app(app)  
     
     db.init_app(app)
