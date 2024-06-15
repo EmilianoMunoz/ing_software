@@ -1,0 +1,1 @@
+GET http://user.eden.localhost/api/v1/all

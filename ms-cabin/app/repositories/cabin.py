@@ -1,6 +1,7 @@
 from app import db
 from app.models import Cabin
 from app.repositories.base import Create, Read, Update, Delete
+from app.mapping.cabin import CabinSchema
 
 class CabinRepository(Create, Read, Update, Delete):
 

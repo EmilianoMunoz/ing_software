@@ -1,20 +1,20 @@
 services:
-
   redis:
-    image: redis:7-bookworm
+    image: redis:7.2.5
     container_name: redis
     restart: always
     volumes:
-    - ./dataredis:/data
-    - ./dataredis/redis.conf:/data/redis.conf
-    command: redis-server /data/redis.conf --loglevel notice --requirepass ${REDIS_PASSWORD}
+      - ./dataredis:/data
+      - ./dataredis/redis.conf:/data/redis.conf
+    command: redis-server /data/redis.conf --requirepass ${REDIS_PASSWORD}
     networks:
       - mired
     labels:
       - "traefik.enable=true"
       - "traefik.tcp.routers.redis.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.redis.entryPoints=redis"
       - "traefik.tcp.services.redis.loadbalancer.server.port=6379"
-    
+
 networks:
   mired:
-      external: true
+    external: true

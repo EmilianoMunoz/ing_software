@@ -1,3 +1,4 @@
+version: '3'
 services:
   user:
     build:
@@ -15,6 +16,7 @@ services:
       - DB_HOST=${DB_HOST}
       - DB_PORT=${DB_PORT}
       - DB_NAME=${DB_NAME}
+      - DATABASE_URL=postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.user.rule=Host(`user.eden.localhost`)"
@@ -30,6 +32,13 @@ services:
       dockerfile: Dockerfile
     networks:
       - mired
+    environment:
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+      - DATABASE_URL=postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.cabin.rule=Host(`cabin.eden.localhost`)"

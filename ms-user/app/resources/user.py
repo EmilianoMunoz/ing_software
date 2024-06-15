@@ -84,7 +84,15 @@ def delete_user(user_id):
 
         if deleted:
             return jsonify({"message": "Usuario eliminado con éxito", "status_code": 200}), 200
-
         return jsonify({"error": "Usuario no encontrado", "status_code": 404}), 404
     except Exception as e:
         return jsonify({"error": str(e), "status_code": 500}), 500
+
+@user.route('/cabins', methods=['GET'])
+def get_cabins():
+    service = UserService()
+    try:
+        cabins = service.get_cabins()
+        return jsonify(cabins), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
