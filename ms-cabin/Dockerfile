@@ -28,4 +28,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 5000
 
 # Define el comando de inicio de la aplicación
-CMD ["python", "./app.py"]
+#CMD ["python", "./app.py"]
+CMD [ "gunicorn", "--workers", "1", "--log-level", "INFO", "--bind", "0.0.0.0:5000", "app:create_app()" ]

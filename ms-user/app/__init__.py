@@ -40,7 +40,6 @@ def create_app():
     app.config['SQLALCHEMY_RECORD_QUERIES'] = False
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DEV_DATABASE_URI')
 
-    
     app.config.from_mapping(cache_config)
     
     cache.init_app(app)  

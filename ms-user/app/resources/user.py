@@ -28,7 +28,7 @@ def post_user():
     try:
         service = UserService()
         user = user_schema.load(request.json)
-        created_user = service.create(user)
+        created_user = service.post_user(user)  # Utiliza post_user en lugar de create
         response = {"user": user_schema.dump(created_user)}
         return jsonify(response), 201
     except Exception as e:
