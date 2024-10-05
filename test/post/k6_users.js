@@ -2,8 +2,7 @@ import http from 'k6/http';
 import { sleep, check } from 'k6';
 
 export let options = {
-    iterations: 1000, // número total de iteraciones (solicitudes)
-    duration: '20s',
+    iterations: 2904, // número total de iteraciones (solicitudes)
     insecureSkipTLSVerify: true, // Ignorar la verificación del certificado
 };
 
